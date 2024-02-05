@@ -33,6 +33,9 @@ app.use((req, res, next) =>{
 //set templete engine
 app.set('view engine', 'ejs');
 
+// route prefix
+app.use("",require("./routes/routes"));
+
 app.get("/",(req,res) => {
     res.send("Hi");
 });
