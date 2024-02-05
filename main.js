@@ -16,6 +16,23 @@ const db=mongoose.connection;
 db.on('error',(error)=> console.log(error));
 db.once('open',()=>console.log("Connected to the Database!"));
 
+//milddlewares
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(session({
+    secret: 'my secret key',
+    saveUninitialized : true,
+    resave: false,
+}));
+
+app.use((req, res, next) =>{
+    res.locals.message =re.session.message;
+    delete req.session.message;
+    next();
+});
+//set templete engine
+app.set('view engine', 'ejs');
+
 app.get("/",(req,res) => {
     res.send("Hi");
 });
